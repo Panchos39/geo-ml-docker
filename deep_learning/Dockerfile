@@ -175,7 +175,8 @@ RUN pip3 install --no-cache-dir --upgrade numpy
 
 RUN pip3 install --no-cache-dir --upgrade pika boto3 kafka-python
 
-RUN pip3 install --no-cache-dir --upgrade geopy google-cloud shapely geojson rasterio
+RUN pip3 install --no-cache-dir --upgrade geopy google-cloud google-cloud-bigquery shapely geojson rasterio
+
 RUN pip3 install jupyter jupyterlab
 #ADD ./ /home/user
 #COPY keras-retinanet /root

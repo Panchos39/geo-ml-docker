@@ -2,6 +2,7 @@ version: '2.3'
 services:
     jupyter_notebook:
         build: ./deep_learning/
+        shm_size: '8gb'
         runtime: nvidia
         ports:
           - "8888:8888"
