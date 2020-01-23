@@ -7,6 +7,7 @@ services:
         ports:
           - "8888:8888"
           - "5000:5000"
+          - "8097:8097"
         expose:
             - "8888"
             - "27017"
@@ -14,6 +15,7 @@ services:
             - "6379"
             - "8080"
             - "5000"
+            - "8097"
         volumes:
             - /home/dxdo-employee/:/home/user/
             - /tmp/.X11-unix:/tmp/.X11-unix
