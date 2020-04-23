@@ -110,9 +110,11 @@ RUN apt-get install -y --no-install-recommends python3-dev python3-pip python3-t
 # Pillow and it's dependencies
 RUN apt-get install -y --no-install-recommends libjpeg-dev zlib1g-dev && \
     pip3 --no-cache-dir install Pillow
+
+RUN apt-get update
 # Science libraries and other common packages
 RUN pip3 --no-cache-dir install \
-    numpy scipy scikit-image pandas seaborn matplotlib Cython requests
+    numpy>=1.14.0 scipy scikit-image pandas seaborn matplotlib Cython requests
 
 RUN apt-get install -y --no-install-recommends \
     libjpeg-dev libpng-dev libtiff-dev \
@@ -148,7 +150,7 @@ RUN cd /usr/local/src/opencv && mkdir build && cd build && \
 #RUN apt-get install -y --no-install-recommends libopencv-*
 
 RUN pip3 install --upgrade pip
-RUN pip3 install --no-cache-dir --upgrade pymongo pika numpy scipy flask
+RUN pip3 install --no-cache-dir --upgrade pymongo pika scipy flask
 
 RUN pip3 install --no-cache-dir tqdm annoy pandas pymongo
 #RUN pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.10.0-cp35-cp35m-linux_x86_64.whl
@@ -171,14 +173,30 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN pip3 install imgaug scikit-learn
-RUN pip3 install --no-cache-dir --upgrade numpy
 
 RUN pip3 install --no-cache-dir --upgrade pika boto3 kafka-python
 
-RUN pip3 install --no-cache-dir --upgrade geopy google-cloud google-cloud-bigquery shapely geojson rasterio
+#RUN pip3 install --no-cache-dir --upgrade geopy google-cloud google-cloud-bigquery shapely geojson rasterio
 
-RUN pip3 install --no-cache-dir --upgrade dominate visdom
+#RUN pip3 install --no-cache-dir --upgrade dominate visdom
 
+#RUN pip3 install isort>=4.2.15 pylint==1.9.1 Sphinx==1.8.0 sphinx-autobuild==0.7.1 sphinxcontrib-fulltoc==1.2.0
+
+#RUN apt-get update && apt-get install -y --no-install-recommends --fix-missing libcurl4-gnutls-dev librtmp-dev
+
+#RUN pip3 install --no-cache-dir Cerberus==1.1 homura==0.1.5 humanize==0.5.1 mapbox-vector-tile==1.2.0 mbutil==0.3.0 mercantile==1.0.0 olefile==0.44  
+
+#RUN pip3 install --no-cache-dir tilepie==0.2.1 pyclipper==1.0.6 pycurl==7.43.0.1
+
+#RUN apt-get install -y --no-install-recommends libsqlite3-dev zlib1g-dev
+
+#RUN git clone https://github.com/mapbox/tippecanoe.git /usr/local/src/tippecanoe
+#RUN cd /usr/local/src/tippecanoe && make -j && make install
+
+#RUN pip3 install --no-cache-dir --upgrade label-maker
+
+RUN pip3 install --no-cache-dir --upgrade numpy
+RUN pip3 install --no-cache-dir progressbar2
 RUN pip3 install jupyter jupyterlab
 #ADD ./ /home/user
 #COPY keras-retinanet /root
@@ -189,6 +207,6 @@ RUN pip3 install jupyter jupyterlab
 WORKDIR /home/user/
 
 #CMD ["jupyter", "notebook", "--no-browser", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
-CMD ["jupyter", "lab", "--no-browser", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
+#CMD ["jupyter", "lab", "--no-browser", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
 #CMD  ["python3", "./mnt/person-tracker/consumer.py"]
 

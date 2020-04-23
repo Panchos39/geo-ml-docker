@@ -17,7 +17,8 @@ services:
             - "5000"
             - "8097"
         volumes:
-            - /home/dxdo-employee/:/home/user/
+            #- /home/dxdo-employee/:/home/user/
+            - /media/shirkin39/DATA1:/home/user/
             - /tmp/.X11-unix:/tmp/.X11-unix
             #xhost +local:docker in terminal before using
         networks:
@@ -28,6 +29,21 @@ services:
         environment:
         - PYTHONUNBUFFERED=0
         - DISPLAY=unix:1
+        command : "jupyter lab --no-browser --allow-root --ip=0.0.0.0 --port=8888"
+
+    #tensorboard:
+    #    build : ./deep_learning/
+    #    runtime: nvidia
+    #    ports :
+    #      - "6006:6006"
+    #    expose:
+    #      - "6006"
+    #    volumes :
+            #- /home/dxdo-employee/:/home/user/
+    #        - /media/shirkin39/DATA1:/home/user/
+    #        - /tmp/.X11-unix:/tmp/.X11-unix
+    #    command : "tensorboard --logdir cosine_metric_learning/eval_output/"
+
 networks:
     application-network:
         external: false
